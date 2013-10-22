@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+	<ui:composition template="HeaderFooterAdmin_template.xhtml">
+            <ui:define name="content">
+                <h:form enctype="multipart/form-data" id="movieListForm">
+                                <p:growl id="messages" showDetail="true"/>
+                                                <p:dataTable id="movies" var="movie" value="#{adminPageController.movieDetailList}" editable="true">  
+                                                    <p:ajax event="rowEdit" listener="#{adminPageController.onMovieEdit}" update=":movieListForm:messages" />  
+                                                    <p:ajax event="rowEditCancel" listener="#{adminPageController.onMovieCancel}" update=":movieListForm:messages" />
+                                                   <p:column headerText="Title" style="width:125px">  
+                                                    <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{movie[1]}" />  
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <p:inputText value="#{movie[1]}" style="width:100%"/>  
+                                                        </f:facet>  
+                                                    </p:cellEditor>  
+                                                </p:column>  
+
+                                                <p:column headerText="Number In Stock" style="width:75px">  
+                                                    <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{movie[2]}" />  
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <p:inputText value="#{movie[2]}" style="width:100%"/>  
+                                                        </f:facet>  
+                                                    </p:cellEditor>  
+                                                </p:column>  
+
+                                               
+                                                <p:column headerText="Sales Price" style="width:75px">  
+                                                    <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{movie[3]}" />  
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <p:inputText value="#{movie[3]}" style="width:100%"/>  
+                                                        </f:facet>  
+                                                    </p:cellEditor>  
+                                                </p:column>
+                                                    
+                                                <p:column headerText="Sales Discount Percent" style="width:75px">  
+                                                    <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{movie[4]}" />  
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <p:inputText value="#{movie[4]}" style="width:100%"/>  
+                                                        </f:facet>  
+                                                    </p:cellEditor>  
+                                                </p:column>
+                                                    
+                                                <p:column headerText="Leases Price" style="width:75px">  
+                                                    <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{movie[5]}" />  
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <p:inputText value="#{movie[5]}" style="width:100%"/>  
+                                                        </f:facet>  
+                                                    </p:cellEditor>  
+                                                </p:column>
+                                                    
+                                                <p:column headerText="Leases Discount Percent" style="width:75px">  
+                                                    <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{movie[6]}" />  
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <p:inputText value="#{movie[6]}" style="width:100%"/>  
+                                                        </f:facet>  
+                                                    </p:cellEditor>  
+                                                </p:column>
+                                                    
+                                                <p:column headerText="Late Charge Per Day" style="width:75px">  
+                                                    <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{movie[7]}" />  
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <p:inputText value="#{movie[7]}" style="width:100%"/>  
+                                                        </f:facet>  
+                                                    </p:cellEditor>  
+                                                </p:column>
+                                                    
+                                                    <p:column headerText="Edit" style="width:50px">  
+                                                        <p:rowEditor />  
+                                                    </p:column>
+                                                    
+                                                    <p:column headerText="Delete" style="width: 50px">
+                                                         <p:commandButton id="showDialog" action="#{adminPageController.onMovieDelete(movie[0])}" ajax="true" update=":movieListForm:movies, :movieListForm:messages" icon="ui-icon-trash" />
+                                                    </p:column>
+
+                                               </p:dataTable> 
+                                
+                                
+                                </h:form>
+                                
+                                <h:form enctype="multipart/form-data" id="newMovieForm">            
+                                <p:panel id="newMoviePanel">
+                                <p:fieldset id="newMovieFieldset" legend="Create New Movie" toggleable="true" toggleSpeed="500" collapsed="true" widgetVar="createVar">  
+                                                    <p:panel header="General Information Details">
+
+                                                             <h:panelGrid columns="3" >
+
+                                                            <h:outputLabel value="Title :"/>
+                                                            <p:inputText id="title" required="true" value="#{adminPageController.movie.title}" requiredMessage="Title cannot be blank !" size="20"/>
+                                                            <p:message for="title" display="icon"/>
+
+                                                            <h:outputLabel value="Category :"/>
+                                                            <p:selectOneMenu value="#{adminPageController.productDescription.category}">  
+                                                                <f:selectItems value="#{adminPageController.movieCategories}" />  
+                                                            </p:selectOneMenu> 
+                                                            <h:outputLabel />
+
+                                                            <h:outputLabel value="Number In Stock :"/>
+                                                            <p:inputText id="nbrInStock" required="true" value="#{adminPageController.movie.nbrInStock}" requiredMessage="Number In Stock cannot be blank !" converterMessage="Number in stock must be integer" size="20"/>
+                                                            <p:message for="nbrInStock" display="icon"/>
+
+
+
+                                                        </h:panelGrid>
+                                                    </p:panel>
+
+                                                    <p:panel header="Sales/Leases Price Details">
+
+                                                            <h:panelGrid columns="3">
+                                                            <h:outputLabel value="Sales Price :"/>
+                                                            <p:inputText id="salesPrice" required="true" value="#{adminPageController.salesProduct.salesPrice}" requiredMessage="Sales Price cannot be blank !" size="20" converterMessage="Sales Price must be a number !"/>
+                                                            <p:message for="salesPrice" display="icon"/>
+
+                                                            <h:outputLabel value="Sales Discount :"/>
+                                                            <p:inputText id="salesDiscount" required="true" value="#{adminPageController.salesProduct.salesDP}" requiredMessage="Sales Discount cannot be blank !" size="20" converterMessage="Sales Discount must be a number !"/>
+                                                            <p:message for="salesDiscount" display="icon"/>
+
+                                                            <h:outputLabel value="Lease Price :"/>
+                                                            <p:inputText id="leasesPrice" required="true" value="#{adminPageController.leasesProduct.leasesPrice}" requiredMessage="Lease Price cannot be blank !" size="20" converterMessage="Lease Price must be a number !"/>
+                                                            <p:message for="leasesPrice" display="icon"/>
+
+                                                            <h:outputLabel value="Lease Discount :"/>
+                                                            <p:inputText id="leaseDiscount" required="true" value="#{adminPageController.leasesProduct.leasesDP}" requiredMessage="Lease Discount cannot be blank !" size="20" converterMessage="Lease Discount must be a number !"/>
+                                                            <p:message for="leaseDiscount" display="icon"/>
+
+                                                            <h:outputLabel value="Late Charge Per Day :"/>
+                                                            <p:inputText id="lateCharge" required="true" value="#{adminPageController.leasesProduct.lateChargePerDay}" requiredMessage="Late Charge Per Day cannot be blank !" size="20" converterMessage="Late Charge Per Day must be a number !"/>
+                                                            <p:message for="leaseDiscount" display="icon"/>
+
+                                                        </h:panelGrid>
+                                                    </p:panel>
+
+                                                    <p:panel header="Product Description Details">
+
+                                                            <h:panelGrid columns="3" >   
+
+                                                            <h:outputLabel value="Description :"/>
+                                                            <p:inputTextarea id="description" required="false" value="#{adminPageController.productDescription.description}" requiredMessage="Description cannot be blank !" rows="6" cols="33" />
+                                                            <p:message for="description" display="icon"/>
+
+                                                            <h:outputLabel value="Picture :"/>
+                                                            <p:fileUpload id="fileUpload" value="#{adminPageController.file}" mode="simple" required="true" requiredMessage="Picture cannot be blank !" />
+                                                            <p:message for="fileUpload" display="icon"/> 
+
+                                                            <h:outputLabel value="Format :"/>
+                                                            <p:inputText id="format" required="true" value="#{adminPageController.productDescription.format}" requiredMessage="Format cannot be blank !" size="20"/>
+                                                            <p:message for="format" display="icon"/>
+
+                                                             <h:outputLabel value="Language :"/>
+                                                            <p:inputText id="language" required="true" value="#{adminPageController.productDescription.language}" requiredMessage="Language cannot be blank !" size="20" converterMessage="Sales Price must be a number !"/>
+                                                            <p:message for="language" display="icon"/>
+
+                                                            <h:outputLabel value="Released Date :"/>
+                                                            <p:calendar value="#{adminPageController.productDescription.releasedDate}" id="releasedDate" pattern="dd/MM/yyyy" showButtonPanel="true" navigator="true" required="true" requiredMessage="Released Date cannot be blank !" converterMessage="Released Date must be in correct pattern"/>
+                                                            <p:message for="releasedDate" display="icon"/>
+
+                                                           <h:outputLabel value="Classification :"/>
+                                                            <p:selectOneMenu value="#{adminPageController.movie.classification}">  
+                                                                <f:selectItems value="#{adminPageController.movieClassifications}" />  
+                                                            </p:selectOneMenu> 
+                                                            <h:outputLabel />
+
+                                                            <h:outputLabel value="Cast Name :"/>
+                                                            <p:inputText id="castName" required="true" value="#{adminPageController.movie.castName}" requiredMessage="Cast Name cannot be blank !" size="20" />
+                                                            <p:message for="castName" display="icon"/>
+
+                                                            <h:outputLabel value="Director :"/>
+                                                            <p:inputText id="director" required="true" value="#{adminPageController.movie.director}" requiredMessage="Director cannot be blank !" size="8" />
+                                                            <p:message for="director" display="icon"/>
+
+                                                            <h:outputLabel value="Runtime :"/>
+                                                            <p:inputText id="runtime" required="true" value="#{adminPageController.movie.runtime}" requiredMessage="Runtime cannot be blank !" size="8" />
+                                                            <p:message for="director" display="icon"/>
+
+                                                            </h:panelGrid>
+                                                        <p:commandButton value="Create New" action="#{adminPageController.doCreateNewMovie()}" ajax="false" oncomplete="createVar.hide()" />
+                                                    </p:panel> 
+                                                </p:fieldset>
+                                        </p:panel>
+                                    </h:form>
+            </ui:define>
+        </ui:composition>
+    </html>
+            

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
+ version="2.1">
+
+<managed-bean>
+ 	<managed-bean-name>signUpController</managed-bean-name>
+ 	<managed-bean-class>com.capstone.Controller.SignUpController</managed-bean-class>
+ 	<managed-bean-scope>view</managed-bean-scope>
+</managed-bean>
+<managed-bean>
+ 	<managed-bean-name>loginController</managed-bean-name>
+ 	<managed-bean-class>com.capstone.Controller.LoginController</managed-bean-class>
+ 	<managed-bean-scope>request</managed-bean-scope>
+</managed-bean>
+
+<managed-bean>
+ 	<managed-bean-name>adminPageController</managed-bean-name>
+ 	<managed-bean-class>com.capstone.Controller.AdminPageController</managed-bean-class>
+ 	<managed-bean-scope>request</managed-bean-scope>
+</managed-bean>
+<managed-bean>
+ 	<managed-bean-name>mainPageController</managed-bean-name>
+ 	<managed-bean-class>com.capstone.Controller.MainPageController</managed-bean-class>
+ 	<managed-bean-scope>session</managed-bean-scope>
+</managed-bean>
+
+<lifecycle>
+    <phase-listener>com.capstone.Security.AuthorizationListener</phase-listener>
+</lifecycle>
+
+<navigation-rule>
+  <from-view-id>*</from-view-id>
+    <navigation-case>
+      <from-outcome>loginPage</from-outcome>
+      <to-view-id>/main.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
+
+</faces-config>

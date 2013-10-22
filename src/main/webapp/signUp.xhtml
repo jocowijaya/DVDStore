@@ -1,0 +1,190 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+	<ui:composition template="HeaderFooter_template.xhtml">
+             
+            
+    	<ui:define name="content">
+            
+            <h:form id="UserSignUpForm">
+                <p:growl id="growl" sticky="true" showDetail="true"/>
+                    <p:wizard widgetVar="wiz" flowListener="#{signUpController.onFlowProcess}">
+                            <p:tab id="personal" title="Personal">
+                                    <p:panel header="Personal Details">
+                                        <p:messages id="personalMessages" />
+
+                                             <h:panelGrid columns="3" >
+
+                                            <h:outputLabel value="Email Address(username)  :"/>
+                                            <p:inputText id="email" value="#{signUpController.customer.email}" required="true" requiredMessage="Email Address cannot be blank !" size="20" validatorMessage="Email is not valid ! (you@yahoo.com)">
+                                                <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                                             </p:inputText>
+                                            <p:message for="email" display="icon"/>
+
+                                            <h:outputLabel value="Password :"/>
+                                            <p:password id="password" value="#{signUpController.customer.password}" required="true" requiredMessage="Password cannot be blank !" match="confirm_password" validatorMessage="Password and confirm password must be matched" size="20"/>
+                                            <p:message for="password" display="icon"/>
+                                            
+                                            <h:outputLabel value="Confirm Password :"/>
+                                            <p:password id="confirm_password" value="#{signUpController.customer.password}" required="true" requiredMessage="Confirm Password cannot be blank !" size="20"/>
+                                            <p:message for="confirm_password" display="icon"/>
+                                            
+                                             <h:outputLabel value="First Name :"/>
+                                             <p:inputText id="fname" value="#{signUpController.customer.firstName}" required="true" requiredMessage="First Name cannot be blank !" size="20"/>
+                                             <p:message for="fname" display="icon"/>
+                                             
+                                             <h:outputLabel value="Last Name :"/>
+                                             <p:inputText id="lname" required="true" value="#{signUpController.customer.lastName}" requiredMessage="Last Name cannot be blank !" size="20"/>
+                                             <p:message for="lname" display="icon"/>
+                                             
+                                             <h:outputLabel value="Date of Birth :"/>
+                                             <p:calendar value="#{signUpController.customer.dateOfBirth}" id="cal" showButtonPanel="true" navigator="true" pattern="dd/MM/yyyy" required="true" requiredMessage="Date Of Birth cannot be blank !" converterMessage="Date of birth must be in correct pattern"/>
+                                             <p:message for="cal" display="icon"/>
+                                             
+                                             <h:outputLabel value="Phone Number :"/>
+                                             <p:inputText id="phoneNbr" required="true" value="#{signUpController.customer.phoneNbr}" requiredMessage="Phone Number cannot be blank !" size="20"/>
+                                             <p:message for="phoneNbr" display="icon"/>
+                                             
+                                        </h:panelGrid>
+                                    </p:panel>
+                            </p:tab>
+
+                            <p:tab id="billing_address" title="Billing Address">
+                                    <p:panel header="Billing Adress Details">
+
+                                            <p:messages id="billingMessages" />
+
+                                            <h:panelGrid columns="3" >      
+                                                <h:outputLabel value="Street :"/>
+                                                <p:inputText id="billing_street" required="true" value="#{signUpController.billingAddress.street}" requiredMessage="Street cannot be blank !" size="20"/>
+                                                <p:message for="billing_street" display="icon"/>
+                                                
+                                                <h:outputLabel value="Suburb :"/>
+                                                <p:inputText id="billing_suburb" required="true" value="#{signUpController.billingAddress.suburb}" requiredMessage="Suburb cannot be blank !" size="20"/>
+                                                <p:message for="billing_suburb" display="icon"/>
+                                                
+                                                <h:outputLabel value="State :"/>
+                                                <p:inputText id="billing_state" required="true" value="#{signUpController.billingAddress.addressState}" requiredMessage="State cannot be blank !" size="20"/>
+                                                <p:message for="billing_state" display="icon"/>
+                                                
+                                                <h:outputLabel value="Postcode :"/>
+                                                <p:inputText id="billing_postcode" required="true" value="#{signUpController.billingAddress.postcode}" requiredMessage="Postcode cannot be blank !" size="20"/>
+                                                <p:message for="billing_postcode" display="icon"/>
+                                            </h:panelGrid>
+                                    </p:panel>
+                            </p:tab>
+
+                            <p:tab id="shipping_address" title="Shipping Address">
+                                    <p:panel header="Shipping Address Details">
+
+                                           <p:messages id="shippingMessages"/>
+
+                                            <h:panelGrid columns="3" >       
+                                                <h:outputLabel value="Street :"/>
+                                                <p:inputText id="shipping_street" required="true" value="#{signUpController.shippingAddress.street}" requiredMessage="Street cannot be blank !" size="20"/>
+                                                <p:message for="shipping_street" display="icon"/>
+                                                
+                                                <h:outputLabel value="Suburb :"/>
+                                                <p:inputText id="shipping_suburb" required="true" value="#{signUpController.shippingAddress.suburb}" requiredMessage="Suburb cannot be blank !" size="20"/>
+                                                <p:message for="shipping_suburb" display="icon"/>
+                                                
+                                                <h:outputLabel value="State :"/>
+                                                <p:inputText id="shipping_state" required="true" value="#{signUpController.shippingAddress.addressState}" requiredMessage="State cannot be blank !" size="20"/>
+                                                <p:message for="shipping_state" display="icon"/>
+                                                
+                                                <h:outputLabel value="Postcode :"/>
+                                                <p:inputText id="shipping_postcode" required="true" value="#{signUpController.shippingAddress.postcode}" requiredMessage="Postcode cannot be blank !" size="20"/>
+                                                <p:message for="shipping_postcode" display="icon"/>
+                                                
+                                            </h:panelGrid>
+                                    </p:panel>
+                            </p:tab>
+
+                            <p:tab id="confirm" title="Confirmation">
+                                    <p:panel header="Confirmation">
+
+                                            <h:panelGrid id="confirmation" columns="2">
+                                                
+                                                <h:outputText value="Email Address (Username): " />
+                                                <h:outputText styleClass="outputLabel"
+                                                              value="#{signUpController.customer.email}" />
+                                                
+                                                <h:outputText value="First Name: " />
+                                                 <h:outputText styleClass="outputLabel"
+                                                                  value="#{signUpController.customer.firstName}" />
+                                                 
+                                                 <h:outputText value="Last Name: " />
+                                                    <h:outputText styleClass="outputLabel"
+                                                                  value="#{signUpController.customer.lastName}" />
+                                                    
+                                                 <h:outputText value="Date Of Birth: " />
+                                                    <h:outputText styleClass="outputLabel"
+                                                                  value="#{signUpController.format.format(signUpController.customer.dateOfBirth)}" />
+                                                 
+                                                 <h:outputText value="Phone Number: " />
+                                                    <h:outputText styleClass="outputLabel"
+                                                                  value="#{signUpController.customer.phoneNbr}" />
+                                                
+                                                 <h:outputText value="Billing Street: " />
+                                                 <h:outputText styleClass="outputLabel"
+                                                                  value="#{signUpController.billingAddress.street}" />
+                                                 
+                                                 <h:outputText value="Billing Suburb: " />
+                                                  <h:outputText styleClass="outputLabel"
+                                                                  value="#{signUpController.billingAddress.suburb}" />
+                                                  
+                                                  <h:outputText value="Billing State: " />
+                                                    <h:outputText styleClass="outputLabel"
+                                                                  value="#{signUpController.billingAddress.addressState}" />
+                                                    
+                                                 <h:outputText value="Billing Post Code: " />
+                                                    <h:outputText styleClass="outputLabel"
+                                                                  value="#{signUpController.billingAddress.postcode}" />   
+                                                       
+                                                 <h:outputText value="Shipping Street: " />
+                                                 <h:outputText styleClass="outputLabel"
+                                                                  value="#{signUpController.shippingAddress.street}" />
+           
+                                                  <h:outputText value="Shipping Suburb: " />
+                                                  <h:outputText styleClass="outputLabel"
+                                                                  value="#{signUpController.shippingAddress.suburb}" />
+
+                                                    <h:outputText value="Shipping State: " />
+                                                    <h:outputText styleClass="outputLabel"
+                                                                  value="#{signUpController.shippingAddress.addressState}" />
+                                                    
+                                                    <h:outputText value="Date Of Birth: " />
+                                                    <h:outputText styleClass="outputLabel"
+                                                                  value="#{signUpController.format.format(signUpController.customer.dateOfBirth)}" />
+                                                    
+                                                    <h:outputText value="Shipping Post Code: " />
+                                                    <h:outputText styleClass="outputLabel"
+                                                                  value="#{signUpController.shippingAddress.postcode}" />
+                                                    
+                                                    
+
+
+                                            </h:panelGrid>
+
+                                        <p:commandButton value="Sign Up" actionListener="#{signUpController.doCreateCustomer}" ajax="false" />
+                                            
+
+                                    </p:panel>
+                            </p:tab>
+
+                    </p:wizard>
+
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+	
+        
+</html>
+
+

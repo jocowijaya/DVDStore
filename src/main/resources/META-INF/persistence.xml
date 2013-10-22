@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+
+	<persistence-unit name="DVDStorePU" transaction-type="JTA">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <!--<jta-data-source>jdbc/__default</jta-data-source>-->
+        <jta-data-source>jdbc/DVDStoreDS</jta-data-source>
+        
+        <class>com.capstone.Entity.Users</class>
+        <class>com.capstone.Entity.Customer</class>
+        <class>com.capstone.Entity.Employee</class>
+     	<class>com.capstone.Entity.Address</class>
+	<class>com.capstone.Entity.ShippingAddress</class>
+        <class>com.capstone.Entity.BillingAddress</class>
+        <class>com.capstone.Entity.Product</class>
+        <class>com.capstone.Entity.ProductDescription</class>
+        <class>com.capstone.Entity.SalesProduct</class>
+        <class>com.capstone.Entity.LeasesProduct</class>
+        <class>com.capstone.Entity.Movie</class>
+        <class>com.capstone.Entity.Soundtrack</class>
+        <class>com.capstone.Entity.Game</class>
+        <class>com.capstone.Entity.SystemRequirement</class>
+        <class>com.capstone.Entity.ShoppingCart</class>
+        <class>com.capstone.Entity.CartItem</class>
+        <class>com.capstone.Entity.Order</class>
+        <class>com.capstone.Entity.OrderDetail</class>
+        <class>com.capstone.Entity.SalesOrderDetail</class>
+        <class>com.capstone.Entity.LeasesOrderDetail</class>
+        <class>com.capstone.Entity.Payment</class>
+        <class>com.capstone.Entity.Cash</class>
+        <class>com.capstone.Entity.OnlinePayment</class>
+        <class>com.capstone.Entity.Delivery</class>
+        <class>com.capstone.Entity.DeliveryDetail</class>
+        
+        
+        <properties>
+	      <property name="eclipselink.ddl-generation" value="create-tables"/>
+	      <property name="eclipselink.logging.level" value="INFO"/>
+        </properties>
+    </persistence-unit>
+
+</persistence>

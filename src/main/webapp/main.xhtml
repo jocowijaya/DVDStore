@@ -1,0 +1,214 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+  
+    <ui:composition template="HeaderFooter_template.xhtml">
+        <ui:define name="search_box">
+                <h:form>
+                     <h:panelGrid columns="3" >
+                     		
+                         <p:inputText id="search_data" value="#{mainPageController.strSearch}" size="30" required="true" requiredMessage="Please enter the product's title" />
+                            <p:selectOneMenu value="#{mainPageController.type}">  
+                                <f:selectItems value="#{mainPageController.listType}" />  
+                            </p:selectOneMenu>
+                            <p:commandButton action="#{mainPageController.search()}" icon="ui-icon-search" ajax="true" update=":MainPageForm:mess, :MainPageForm:categoryMenu ,:MainPageForm:productPanel, :MainPageForm:productDataGrid" />
+                            
+                           
+                      </h:panelGrid>
+        	</h:form>
+                
+            </ui:define>   
+    	<ui:define name="content">
+        
+            <h:form enctype="multipart/form-data" id="MainPageForm" prependId="true">
+                <p:growl id="mess" showDetail="true"/>
+               <div class="content_general">
+                   <p:panel id="typePanel">
+                       
+                        <f:facet name="header">
+                            <p:commandButton value="Movie" action="#{mainPageController.changeType()}" ajax="true" update="categoryMenu, productPanel">
+                                <f:setPropertyActionListener target="#{mainPageController.type}" value="Movie" />
+                            </p:commandButton>
+                        </f:facet>
+                        <f:facet name="header">
+                            <p:commandButton value="Game" action="#{mainPageController.changeType()}" ajax="true" update="categoryMenu, productPanel">
+                                <f:setPropertyActionListener target="#{mainPageController.type}" value="Game" />
+                            </p:commandButton>
+                        </f:facet>
+                        <f:facet name="header">
+                            <p:commandButton value="Soundtrack" action="#{mainPageController.changeType()}" ajax="true" update="categoryMenu, productPanel">
+                                <f:setPropertyActionListener target="#{mainPageController.type}" value="Soundtrack" />
+                            </p:commandButton>
+                        </f:facet>
+
+                    </p:panel>
+                   
+               </div>  
+
+                 <div class="content1">
+                   <p:panel id="categoryPanel">
+                        <f:facet name="header">
+                            <h:outputText value="Categories" />
+                        </f:facet>
+                        <h:dataTable id="categoryMenu" value="#{mainPageController.listCategories}" var="category">
+                              <h:column>
+                                  <p:commandButton value="#{category}" action="#{mainPageController.changeCategory(category)}" ajax="true" update=":MainPageForm:productPanel" />                
+                              </h:column>
+                         </h:dataTable>
+                    </p:panel>
+                 </div>
+                 
+                <div class="content2">
+                   <p:panel id="productPanel">
+                       <f:facet name="header">
+                            <h:outputText id="categoryName" value="#{mainPageController.type}" />
+                        </f:facet>
+                       <p:dataGrid id="productDataGrid" var="pro" value="#{mainPageController.listProducts}" columns="3"
+                                rows="12" paginator="true"
+                                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                rowsPerPageTemplate="6,9,12">
+
+                            <p:panel header="#{pro.title}" style="text-align:center">
+                                <h:panelGrid columns="1" style="width:100%">
+                                    <p:commandLink action="#{mainPageController.showDetails(pro)}" ajax="true" oncomplete="productDialog.show()" update=":MainPageForm:productDetail, :MainPageForm:mess">
+                                        <p:graphicImage value="/resources/product_images/#{pro.image}" width="150px" height="150px" />
+                                    </p:commandLink>
+                                </h:panelGrid>
+                            </p:panel>
+
+                        </p:dataGrid>
+                    </p:panel>
+                    
+                    
+                    <p:dialog header="Product Detail" widgetVar="productDialog" modal="true">  
+		                               <p:outputPanel id="productDetail" style="text-align:center;" layout="block">
+		                                    <div class="content_left">
+                                                        <h:graphicImage value="/resources/product_images/#{mainPageController.productDetails[0]}" width="300" height="290"/>
+		                                    <div class="button_content_left">
+                                                        <h:panelGrid columns="2" >
+                                                            <p:commandButton icon="ui-icon-plusthick" value="Buy Cart" action="#{mainPageController.addBuyItem()}" ajax="true" update=":MainPageForm:mess" />
+                                                            <p:commandButton icon="ui-icon-plusthick" value="Rent Cart" action="#{mainPageController.addRentItem()}" ajax="true" update=":MainPageForm:mess" />
+                                                            <p:commandButton icon="ui-icon-circle-arrow-w" value="Continue Shopping" onclick="productDialog.hide()" ajax="true" />
+                                                            <p:commandButton icon="ui-icon-cricle-arrow-e" value="View Shopping Cart" action="MyCart.xhtml" ajax="false" />
+							</h:panelGrid>
+                                                 
+		                                      </div>
+		                                  </div>
+		    
+		                                 <div class="content_right">
+		                                   <div class="content_right_1">
+		                                       <h3>General Features</h3>
+                                                <p:panel style="height:220px;">
+		                                      <h:panelGrid columns="2" >
+		    
+		                                              <h:outputLabel value="Title : "/>
+		                                              <h:outputText value="#{mainPageController.productDetails[1]}"/>
+		    
+		                                          <h:outputLabel value="Description : "/>
+		                                          <h:outputText value="#{mainPageController.productDescription.description}"/>
+		    
+		                                          <h:outputLabel value="Format : "/>
+		                                          <h:outputText value="#{mainPageController.productDescription.format}"/>
+		    
+		                                          <h:outputLabel value="Language : "/>
+		                                          <h:outputText value="#{mainPageController.productDescription.format}"/>
+		    
+		                                          <h:outputLabel value="Released date : "/>
+		                                          <h:outputText value="#{mainPageController.dateReleased}"/>
+		    
+		                                      </h:panelGrid>
+                                               </p:panel>
+		                                  </div>
+		    
+		                                    <div class="content_right_2">
+		                                      <h3>Price</h3>
+                                                 <p:panel style="height:220px;">
+                                                     <h:panelGrid columns="2" >
+                    
+                                                              <h:outputLabel value="Sales Price : "/>
+                                                              <h:outputText value="#{mainPageController.salesProduct.salesPrice}($)"/>
+                    
+                                                          <h:outputLabel value="Leases Price : "/>
+                                                          <h:outputText value="#{mainPageController.leasesProduct.leasesPrice}($)"/>
+                    
+                                                      </h:panelGrid>
+                                              </p:panel>
+		                                    </div>
+		    
+		                                     <div class="content_right_3">
+		                                       <h3>Special Features</h3>
+                                                       <p:panel style="height:120px;" visible="#{mainPageController.movie_special}">
+                                                           
+                                                           <h:panelGrid columns="2" >
+		                                              <h:outputLabel value="Classification : "/>
+		                                              <h:outputText value="#{mainPageController.productDetails[3]}"/>
+                                                            
+                                                              <h:outputLabel value="Cast : "/>
+                                                              <h:outputText value="#{mainPageController.productDetails[4]}"/>
+
+                                                             <h:outputLabel value="Director : "/>
+                                                             <h:outputText value="#{mainPageController.productDetails[5]}"/>
+
+                                                              <h:outputLabel value="Runtime : "/>
+                                                              <h:outputText value="#{mainPageController.productDetails[6]}"/>
+                                                            </h:panelGrid>
+                                                       </p:panel>
+                                                       <p:panel style="height:120px;" visible="#{mainPageController.game_special}">
+                                                       <h:panelGrid columns="2">
+                                                           
+		                                              <h:outputLabel value="Classification : "/>
+		                                              <h:outputText value="#{mainPageController.productDetails[3]}"/>
+                                                            
+                                                              <h:outputLabel value="Manufacturer : "/>
+                                                              <h:outputText value="#{mainPageController.productDetails[4]}"/>
+
+                                                             <h:outputLabel value="Number of players : "/>
+                                                             <h:outputText value="#{mainPageController.productDetails[5]}"/>
+
+                                                       </h:panelGrid>
+                                                       </p:panel>
+                                                       <p:panel style="height:120px;" visible="#{mainPageController.soundtrack_special}">
+                                                       <h:panelGrid columns="2">
+                                                           
+		                                              <h:outputLabel value="Album : "/>
+		                                              <h:outputText value="#{mainPageController.productDetails[3]}"/>
+                                                            
+                                                              <h:outputLabel value="Artist : "/>
+                                                              <h:outputText value="#{mainPageController.productDetails[4]}"/>
+
+                                                             <h:outputLabel value="Number of tracks : "/>
+                                                             <h:outputText value="#{mainPageController.productDetails[5]}"/>
+
+                                                       </h:panelGrid>
+                                                       </p:panel>
+		                                  </div>
+		    
+                                                   <div class="content_right_4">
+                                                      <h3>Discount</h3>
+                                                       <p:panel style="height:120px;">
+                                                     <h:panelGrid columns="2" >
+                    
+                                                          <h:outputLabel value="Sales Discount Special : "/>
+                                                          <h:outputText value="#{mainPageController.salesProduct.salesDP}%"/>
+                    
+                                                          <h:outputLabel value="Leases Discount Special : "/>
+                                                          <h:outputText value="#{mainPageController.leasesProduct.leasesDP}%"/>
+                    
+                                                      </h:panelGrid>
+                                                       </p:panel>
+                                                    </div>
+		                                   </div>
+		                                </p:outputPanel>
+                       </p:dialog>
+                 </div> 
+                                     
+            </h:form>
+   
+    	</ui:define>
+    </ui:composition>
+</html>
+

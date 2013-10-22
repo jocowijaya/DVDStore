@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+<title>DVD Store</title>
+<link rel="stylesheet" type="text/css" href="cssFile.css" />
+</h:head>
+<h:body>
+        <div class="wrap">
+        
+        	 <div class="header1">
+                <h:form>
+                <h:commandLink value="My Account" action="main.faces"/> | <h:commandLink value="Functions" action="main.faces"/> | <h:commandLink value="Help" action="main.faces"/> | <h:commandLink id="logoutLink" value="Log Out" style="visibility: hidden"/>
+                 </h:form> 
+            </div>
+            
+            <div id="banner">
+            	<h:graphicImage value="pic/Banner.gif" width="1027" height="242"/> 
+                <hr/> 
+    		</div>
+		 
+        
+ 			     
+            <div class="productInfo_content">
+                        <div class="content_general">
+                                     		<h:form id="menuForm">
+                                  			 <p:panel id="menuPanel">
+                                      
+                                                <f:facet name="header">
+                                                    <h:outputText value="Menu" />
+                                                </f:facet>
+                                                <h:panelGrid columns="5" >
+                                                <p:commandButton value="Manage Customer" action="manageCustomer.xhtml" ajax="false" /> 
+                                                <p:commandButton value="Manage Employee" action="manageEmployee.xhtml" ajax="false" />
+                                                <p:commandButton value="Manage Movie" action="manageMovie.xhtml" ajax="false" />
+                                                <p:commandButton value="Manage Game" action="manageGame.xhtml" ajax="false" />
+                                                <p:commandButton value="Manage Soundtrack" action="manageSoundtrack.xhtml" ajax="false" />
+                                                </h:panelGrid>
+                                       
+                                    		</p:panel>
+                                         </h:form>
+                         </div>
+                         
+                        <div class="content_general_head">
+                            <ui:insert name="content">
+                            </ui:insert>
+                        </div>
+             </div>
+              
+
+                
+            <h:form>
+            <div class="footer">
+				 <p id="footer-font"> 
+                 <hr />
+                  <h:commandLink value="Home" action="main.faces"/> | <h:commandLink value="About Us" action="aboutUs.faces"/> | <h:commandLink value="Payment" action="payment.faces"/> | <h:commandLink value="Contact Us" action="contactUs.faces"/>
+                 <br />
+                 <br />
+                 Copyright@ 2012 Joco Wijaya (s0205991) and Khanh Duy Huynh (s0187523). All rights reserved.</p>
+          	</div>
+            </h:form>
+            
+        </div>
+</h:body>
+</html>

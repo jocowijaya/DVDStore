@@ -1,0 +1,499 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+	<ui:composition template="HeaderFooterAdmin_template.xhtml">
+    	<ui:define name="content">
+             <div class="header_general_2">
+                 <p:tabView id="tabView" widgetVar="viewVar">
+           
+                    <p:tab id="employeeTab" title="Employee Information">
+
+                    </p:tab>
+                
+                    <p:tab id="customerTab" title="Customer Information">
+                        <p:tabView id="customerView" widgetVar="customerVar">       
+                                <p:tab id="customerViewTab" title="View Customer Information">
+                                   
+				
+                                    
+                                    
+                                    
+
+                                </p:tab>
+                                <p:tab title="Add Customer Information">                    
+                                     <h:form id="UserSignUpForm">
+                                           <p:messages id="signUpMessages" />
+                                                  
+                                                      <p:panel header="Personal Details">
+                                                            
+                                                            <h:panelGrid columns="3" >
+                                                               <h:outputLabel value="Email Address(username)  :"/>
+                                                               <p:inputText id="email" value="#{signUpController.customer.email}" required="true" requiredMessage="Email Address cannot be blank !" size="20" validatorMessage="Email is not valid ! (you@yahoo.com)">
+                                                                     <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                                                               </p:inputText>
+                                                               <p:message for="email" display="icon"/>
+
+                                                               <h:outputLabel value="Password :"/>
+                                                               <p:password id="password" value="#{signUpController.customer.password}" required="true" requiredMessage="Password cannot be blank !" match="confirm_password" validatorMessage="Password and confirm password must be matched" size="20"/>
+                                                               <p:message for="password" display="icon"/>
+
+                                                               <h:outputLabel value="Confirm Password :"/>
+                                                               <p:password id="confirm_password" value="#{signUpController.customer.password}" required="true" requiredMessage="Confirm Password cannot be blank !" size="20"/>
+                                                               <p:message for="confirm_password" display="icon"/>
+
+                                                               <h:outputLabel value="First Name :"/>
+                                                               <p:inputText id="fname" value="#{signUpController.customer.firstName}" required="true" requiredMessage="First Name cannot be blank !" size="20"/>
+                                                               <p:message for="fname" display="icon"/>
+
+                                                               <h:outputLabel value="Last Name :"/>
+                                                               <p:inputText id="lname" required="true" value="#{signUpController.customer.lastName}" requiredMessage="Last Name cannot be blank !" size="20"/>
+                                                               <p:message for="lname" display="icon"/>
+
+                                                               <h:outputLabel value="Date of Birth :"/>
+                                                               <p:calendar value="#{signUpController.customer.dateOfBirth}" id="cal" pattern="dd MMM, yyyy" showButtonPanel="true" navigator="true" required="true" requiredMessage="Date Of Birth cannot be blank !" converterMessage="Date of birth must be in correct pattern"/>
+                                                               <p:message for="cal" display="icon"/>
+
+                                                               <h:outputLabel value="Phone Number :"/>
+                                                               <p:inputText id="phoneNbr" required="true" value="#{signUpController.customer.phoneNbr}" requiredMessage="Phone Number cannot be blank !" size="20"/>
+                                                               <p:message for="phoneNbr" display="icon"/>
+
+                                                            </h:panelGrid>
+                                                          </p:panel>
+                                                       
+                                                           <p:panel header="Billing Adress Details">
+
+                                                                <h:panelGrid columns="3" >      
+                                                                    <h:outputLabel value="Street :"/>
+                                                                    <p:inputText id="billing_street" required="true" value="#{signUpController.billingAddress.street}" requiredMessage="Street cannot be blank !" size="20"/>
+                                                                    <p:message for="billing_street" display="icon"/>
+
+                                                                    <h:outputLabel value="Suburb :"/>
+                                                                    <p:inputText id="billing_suburb" required="true" value="#{signUpController.billingAddress.suburb}" requiredMessage="Suburb cannot be blank !" size="20"/>
+                                                                    <p:message for="billing_suburb" display="icon"/>
+
+                                                                    <h:outputLabel value="State :"/>
+                                                                    <p:inputText id="billing_state" required="true" value="#{signUpController.billingAddress.addressState}" requiredMessage="State cannot be blank !" size="20"/>
+                                                                    <p:message for="billing_state" display="icon"/>
+
+                                                                    <h:outputLabel value="Postcode :"/>
+                                                                    <p:inputText id="billing_postcode" required="true" value="#{signUpController.billingAddress.postcode}" requiredMessage="Postcode cannot be blank !" size="20"/>
+                                                                    <p:message for="billing_postcode" display="icon"/>
+                                                                 </h:panelGrid>
+                                                              </p:panel>
+                                                          
+                                                               <p:panel header="Shipping Address Details">
+
+                                                                   <h:panelGrid columns="3" >       
+                                                                        <h:outputLabel value="Street :"/>
+                                                                        <p:inputText id="shipping_street" required="true" value="#{signUpController.shippingAddress.street}" requiredMessage="Street cannot be blank !" size="20"/>
+                                                                        <p:message for="shipping_street" display="icon"/>
+
+                                                                        <h:outputLabel value="Suburb :"/>
+                                                                        <p:inputText id="shipping_suburb" required="true" value="#{signUpController.shippingAddress.suburb}" requiredMessage="Suburb cannot be blank !" size="20"/>
+                                                                        <p:message for="shipping_suburb" display="icon"/>
+
+                                                                        <h:outputLabel value="State :"/>
+                                                                        <p:inputText id="shipping_state" required="true" value="#{signUpController.shippingAddress.addressState}" requiredMessage="State cannot be blank !" size="20"/>
+                                                                        <p:message for="shipping_state" display="icon"/>
+
+                                                                        <h:outputLabel value="Postcode :"/>
+                                                                        <p:inputText id="shipping_postcode" required="true" value="#{signUpController.shippingAddress.postcode}" requiredMessage="Postcode cannot be blank !" size="20"/>
+                                                                        <p:message for="shipping_postcode" display="icon"/>
+
+                                                                    </h:panelGrid>
+                                                                 
+                                                            
+                                                                   <p:commandButton value="Sign Up" actionListener="#{signUpController.doCreateCustomer}" ajax="true" update="signUpMessages" />
+                                                          </p:panel>
+
+                                      </h:form>
+                                </p:tab>
+                             
+                        </p:tabView>      
+                    </p:tab>
+                    <p:tab id="productTab" title="Product Information">
+                        
+                        <p:tabView id="productView">
+                            <p:tab title="View Product Information">
+                                    <p:tabView id="viewProductView" widgetVar="productViewVar">
+                         
+                                        <p:tab title="Movie">
+                                            <h:form id="movieListForm">
+
+                                                <p:dataTable id="movies" var="movie" value="#{adminPageController.listMovies}" rowKey="#{movie.PID}"  
+                                                             selection="#{adminPageController.movieSelected}" selectionMode="single">  
+
+                                                   <p:column headerText="Title">  
+                                                       #{movie.title}  
+                                                   </p:column>  
+
+                                                   <p:column headerText="Number In Stock">  
+                                                       #{movie.nbrInStock}  
+                                                   </p:column>  
+
+                                                   <p:column headerText="Classification" >  
+                                                       #{movie.classification}  
+                                                   </p:column>  
+
+                                                   <p:column headerText="Cast Name">  
+                                                       #{movie.castName}  
+                                                   </p:column>  
+                                                    
+                                                    <f:facet name="footer">  
+                                                        <p:commandButton id="viewMovieButton" value="View" icon="ui-icon-search"  
+                                                                update=":tabView:productTab:viewProductView" oncomplete="movieVar.show()"/>  
+                                                    </f:facet>
+
+                                               </p:dataTable> 
+                                                
+                                                <p:dialog id="movieDialog" header="Movie" widgetVar="movieVar" resizable="false"  
+                                                              width="300" showEffect="clip" hideEffect="fold">  
+
+                                                        <h:panelGrid id="movieDisplay" columns="3" cellpadding="4">  
+
+                                                            <f:facet name="header">  
+                                                                <p:graphicImage value="/resoures/product_images/#{adminPageController.movieSelected.image}.jpg"/>  
+                                                            </f:facet>  
+
+                                                            <h:outputText value="Title:" />  
+                                                            <h:inputText id="title" value="#{adminPageController.movieSelected.title}" requiredMessage="Title cannot be blank !" size="20" />
+                                                            <p:message for="title" display="icon"/>
+
+                                                            <h:outputText value="Number In Stock:" />  
+                                                            <h:inputText id="nbrInStock" value="#{adminPageController.movieSelected.nbrInStock}" requiredMessage="Number In Stock cannot be blank !" converterMessage="Number in stock must be integer" size="20" />  
+                                                            <p:message for="nbrInStock" display="icon"/>
+                                                             
+                                                        </h:panelGrid>  
+                                                    </p:dialog>
+
+                                    </h:form>
+                                        </p:tab>
+                        
+                                        <p:tab title="Music">
+                        
+                                        </p:tab>
+                        
+                                        <p:tab title="Games">
+                       
+                                        </p:tab>
+                         
+                                    </p:tabView>      
+              			 </p:tab>
+                            <p:tab title="Add Product Information">                    
+                                <p:tabView id="addProductView">     
+                                        <p:tab title="Movie Information">
+                                           <h:form enctype="multipart/form-data" id="NewMovieForm">
+                                           <p:messages id="newMovieMessages" />
+                                                <p:panel header="General Information Details">
+                                                     <h:panelGrid columns="3" >
+                                                        <h:outputLabel value="Title :"/>
+                                                        <p:inputText id="title" required="true" value="#{movieController.movie.title}" requiredMessage="Title cannot be blank !" size="20"/>
+                                                        <p:message for="title" display="icon"/>
+
+                                                        <h:outputLabel value="Category :"/>
+                                                        <p:selectOneMenu value="#{movieController.productDescription.category}">  
+                                                                <f:selectItems value="#{movieController.listCategory}" />  
+                                                        </p:selectOneMenu> 
+                                                        <h:outputLabel />
+
+                                                        <h:outputLabel value="Number In Stock :"/>
+                                                        <p:inputText id="nbrInStock" required="true" value="#{movieController.movie.nbrInStock}" requiredMessage="Number In Stock cannot be blank !" converterMessage="Number in stock must be integer" size="20"/>
+                                                        <p:message for="nbrInStock" display="icon"/>
+                                                    </h:panelGrid>
+                                                 </p:panel>
+
+                                                 <p:panel header="Sales/Leases Price Details">
+                                                    <h:panelGrid columns="3">
+                                                         <h:outputLabel value="Sales Price :"/>
+                                                         <p:inputText id="salesPrice" required="true" value="#{movieController.salesProduct.salesPrice}" requiredMessage="Sales Price cannot be blank !" size="20" converterMessage="Sales Price must be a number !"/>
+                                                         <p:message for="salesPrice" display="icon"/>
+
+                                                         <h:outputLabel value="Sales Discount :"/>
+                                                         <p:inputText id="salesDiscount" required="true" value="#{movieController.salesProduct.salesDP}" requiredMessage="Sales Discount cannot be blank !" size="20" converterMessage="Sales Discount must be a number !"/>
+                                                         <p:message for="salesDiscount" display="icon"/>
+
+                                                         <h:outputLabel value="Lease Price :"/>
+                                                         <p:inputText id="leasesPrice" required="true" value="#{movieController.leasesProduct.leasesPrice}" requiredMessage="Lease Price cannot be blank !" size="20" converterMessage="Lease Price must be a number !"/>
+                                                         <p:message for="leasesPrice" display="icon"/>
+
+                                                         <h:outputLabel value="Lease Discount :"/>
+                                                         <p:inputText id="leaseDiscount" required="true" value="#{movieController.leasesProduct.leasesDP}" requiredMessage="Lease Discount cannot be blank !" size="20" converterMessage="Lease Discount must be a number !"/>
+                                                         <p:message for="leaseDiscount" display="icon"/>
+
+                                                         <h:outputLabel value="Late Charge Per Day :"/>
+                                                         <p:inputText id="lateCharge" required="true" value="#{movieController.leasesProduct.lateChargePerDay}" requiredMessage="Late Charge Per Day cannot be blank !" size="20" converterMessage="Late Charge Per Day must be a number !"/>
+                                                         <p:message for="leaseDiscount" display="icon"/>
+                                                      </h:panelGrid>
+                                                   </p:panel>
+
+                                                   <p:panel header="Product Description Details">
+                                                      <h:panelGrid columns="3" >   
+                                                          <h:outputLabel value="Description :"/>
+                                                          <p:inputTextarea id="description" required="false" value="#{movieController.productDescription.description}" requiredMessage="Description cannot be blank !" rows="6" cols="33" />
+                                                          <p:message for="description" display="icon"/>
+
+                                                          <h:outputLabel value="Picture :"/>
+                                                          <p:fileUpload id="fileUpload" value="#{movieController.file}" mode="simple" required="true" requiredMessage="Picture cannot be blank !" />
+                                                          <p:message for="fileUpload" display="icon"/> 
+
+                                                          <h:outputLabel value="Format :"/>
+                                                          <p:inputText id="format" required="true" value="#{movieController.productDescription.format}" requiredMessage="Format cannot be blank !" size="20"/>
+                                                          <p:message for="format" display="icon"/>
+
+                                                          <h:outputLabel value="Language :"/>
+                                                          <p:inputText id="language" required="true" value="#{movieController.productDescription.language}" requiredMessage="Language cannot be blank !" size="20" converterMessage="Sales Price must be a number !"/>
+                                                          <p:message for="language" display="icon"/>
+
+                                                          <h:outputLabel value="Released Date :"/>
+                                                          <p:calendar value="#{movieController.productDescription.releasedDate}" id="releasedDate" pattern="dd MMM, yyyy" showButtonPanel="true" navigator="true" required="true" requiredMessage="Released Date cannot be blank !" converterMessage="Released Date must be in correct pattern"/>
+                                                          <p:message for="releasedDate" display="icon"/>
+
+                                                          <h:outputLabel value="Classification :"/>
+                                                          <p:selectOneMenu value="#{movieController.movie.classification}">  
+                                                                 <f:selectItems value="#{movieController.listClassification}" />  
+                                                          </p:selectOneMenu> 
+                                                          <h:outputLabel />
+
+                                                          <h:outputLabel value="Cast Name :"/>
+                                                          <p:inputText id="castName" required="true" value="#{movieController.movie.castName}" requiredMessage="Cast Name cannot be blank !" size="20" />
+                                                          <p:message for="castName" display="icon"/>
+
+                                                          <h:outputLabel value="Director :"/>
+                                                          <p:inputText id="director" required="true" value="#{movieController.movie.director}" requiredMessage="Director cannot be blank !" size="8" />
+                                                          <p:message for="director" display="icon"/>
+
+                                                          <h:outputLabel value="Runtime :"/>
+                                                          <p:inputText id="runtime" required="true" value="#{movieController.movie.runtime}" requiredMessage="Runtime cannot be blank !" size="8" />
+                                                          <p:message for="runtime" display="icon"/>
+                                                       </h:panelGrid>
+                                                       <p:commandButton value="Create New" actionListener="#{movieController.doCreateNewMovie}" ajax="true" />
+                                                    </p:panel>                                    
+                                                </h:form>        
+                                        </p:tab>
+                                        <p:tab title="Soundtrack Information">                                          
+                                                <h:form enctype="multipart/form-data" id="NewSoundtrackForm">
+                                                    <p:messages id="newSoundtrackMessages" />
+                                                    <p:panel header="General Information Details">
+                                                        <h:panelGrid columns="3" >
+
+                                                           <h:outputLabel value="Title :"/>
+                                                           <p:inputText id="title" required="true" value="#{soundtrackController.soundtrack.title}" requiredMessage="Title cannot be blank !" size="20"/>
+                                                           <p:message for="title" display="icon"/>
+
+                                                           <h:outputLabel value="Category :"/>
+                                                           <p:selectOneMenu value="#{soundtrackController.productDescription.category}">  
+                                                                 <f:selectItems value="#{soundtrackController.listCategory}" />  
+                                                           </p:selectOneMenu> 
+                                                           <h:outputLabel />
+
+                                                           <h:outputLabel value="Number In Stock :"/>
+                                                           <p:inputText id="nbrInStock" required="true" value="#{soundtrackController.soundtrack.nbrInStock}" requiredMessage="Number In Stock cannot be blank !" converterMessage="Number in stock must be integer" size="20"/>
+                                                           <p:message for="nbrInStock" display="icon"/>
+                                                        </h:panelGrid>
+                                                     </p:panel>
+                                                     <p:panel header="Sales/Leases Price Details">
+                                                        <h:panelGrid columns="3">
+                                                            <h:outputLabel value="Sales Price :"/>
+                                                            <p:inputText id="salesPrice" required="true" value="#{soundtrackController.salesProduct.salesPrice}" requiredMessage="Sales Price cannot be blank !" size="20" converterMessage="Sales Price must be a number !"/>
+                                                            <p:message for="salesPrice" display="icon"/>
+
+                                                            <h:outputLabel value="Sales Discount :"/>
+                                                            <p:inputText id="salesDiscount" required="true" value="#{soundtrackController.salesProduct.salesDP}" requiredMessage="Sales Discount cannot be blank !" size="20" converterMessage="Sales Discount must be a number !"/>
+                                                            <p:message for="salesDiscount" display="icon"/>
+
+                                                            <h:outputLabel value="Lease Price :"/>
+                                                            <p:inputText id="leasesPrice" required="true" value="#{soundtrackController.leasesProduct.leasesPrice}" requiredMessage="Lease Price cannot be blank !" size="20" converterMessage="Lease Price must be a number !"/>
+                                                            <p:message for="leasesPrice" display="icon"/>
+
+                                                            <h:outputLabel value="Lease Discount :"/>
+                                                            <p:inputText id="leaseDiscount" required="true" value="#{soundtrackController.leasesProduct.leasesDP}" requiredMessage="Lease Discount cannot be blank !" size="20" converterMessage="Lease Discount must be a number !"/>
+                                                            <p:message for="leaseDiscount" display="icon"/>
+
+                                                            <h:outputLabel value="Late Charge Per Day :"/>
+                                                            <p:inputText id="lateCharge" required="true" value="#{soundtrackController.leasesProduct.lateChargePerDay}" requiredMessage="Late Charge Per Day cannot be blank !" size="20" converterMessage="Late Charge Per Day must be a number !"/>
+                                                            <p:message for="leaseDiscount" display="icon"/>
+                                                          </h:panelGrid>
+                                                      </p:panel>
+                                                      <p:panel header="Product Description Details">
+                                                          <h:panelGrid columns="3" >   
+                                                             <h:outputLabel value="Description :"/>
+                                                             <p:inputTextarea id="description" required="false" value="#{soundtrackController.productDescription.description}" requiredMessage="Description cannot be blank !" rows="6" cols="33" />
+                                                             <p:message for="description" display="icon"/>
+
+                                                             <h:outputLabel value="Picture :"/>
+                                                             <p:fileUpload id="fileUpload" value="#{soundtrackController.file}" mode="simple" required="true" requiredMessage="Picture cannot be blank !" />
+                                                             <p:message for="fileUpload" display="icon"/> 
+
+                                                             <h:outputLabel value="Format :"/>
+                                                             <p:inputText id="format" required="true" value="#{soundtrackController.productDescription.format}" requiredMessage="Format cannot be blank !" size="20"/>
+                                                             <p:message for="format" display="icon"/>
+
+                                                             <h:outputLabel value="Language :"/>
+                                                             <p:inputText id="language" required="true" value="#{soundtrackController.productDescription.language}" requiredMessage="Language cannot be blank !" size="20" converterMessage="Sales Price must be a number !"/>
+                                                             <p:message for="language" display="icon"/>
+
+                                                             <h:outputLabel value="Released Date :"/>
+                                                             <p:calendar value="#{soundtrackController.productDescription.releasedDate}" id="releasedDate" pattern="dd MMM, yyyy" showButtonPanel="true" navigator="true" required="true" requiredMessage="Released Date cannot be blank !" converterMessage="Released Date must be in correct pattern"/>
+                                                             <p:message for="releasedDate" display="icon"/>
+
+                                                             <h:outputLabel value="Album :"/>
+                                                             <p:inputText id="album" required="true" value="#{soundtrackController.soundtrack.album}" requiredMessage="Album cannot be blank !" size="20" />
+                                                             <p:message for="album" display="icon"/>
+
+                                                             <h:outputLabel value="Artist :"/>
+                                                             <p:inputText id="artist" required="true" value="#{soundtrackController.soundtrack.artist}" requiredMessage="Artist cannot be blank !" size="8" />
+                                                             <p:message for="artist" display="icon"/>
+
+                                                             <h:outputLabel value="Number of tracks :"/>
+                                                             <p:inputText id="nbrOfTracks" required="true" value="#{soundtrackController.soundtrack.nbrOfTracks}" requiredMessage="Number of tracka cannot be blank !" converterMessage="Number of tracks must be integer" size="8" />
+                                                             <p:message for="nbrOfTracks" display="icon"/>
+
+                                                           </h:panelGrid>
+                                                          <p:commandButton value="Create New" action="#{soundtrackController.doCreateNewSoundtrack()}" ajax="true" update="newSoundtrackMessages" />
+                                                    </p:panel>                     
+                                                </h:form>
+                                        </p:tab>
+                        
+                                        <p:tab title="Games Information">        
+                                                <h:form enctype="multipart/form-data" id="NewGameForm">
+                                                    <p:messages id="newGameMessages" />
+                                                    <p:panel header="General Information Details">
+                                                        <h:panelGrid columns="3" >
+                                                            <h:outputLabel value="Title :"/>
+                                                            <p:inputText id="title" required="true" value="#{gameController.game.title}" requiredMessage="Title cannot be blank !" size="20"/>
+                                                            <p:message for="title" display="icon"/>
+
+                                                            <h:outputLabel value="Category :"/>
+                                                            <p:selectOneMenu value="#{gameController.productDescription.category}">  
+                                                                    <f:selectItems value="#{gameController.listCategory}" />  
+                                                            </p:selectOneMenu> 
+                                                            <h:outputLabel />
+
+                                                            <h:outputLabel value="Number In Stock :"/>
+                                                            <p:inputText id="nbrInStock" required="true" value="#{gameController.game.nbrInStock}" requiredMessage="Number In Stock cannot be blank !" converterMessage="Number in stock must be integer" size="20"/>
+                                                            <p:message for="nbrInStock" display="icon"/>
+                                                        </h:panelGrid>
+                                                    </p:panel>
+                                                    <p:panel header="Sales/Leases Price Details">
+                                                         <h:panelGrid columns="3">
+                                                             
+                                                             <h:outputLabel value="Sales Price :"/>
+                                                             <p:inputText id="salesPrice" required="true" value="#{gameController.salesProduct.salesPrice}" requiredMessage="Sales Price cannot be blank !" size="20" converterMessage="Sales Price must be a number !"/>
+                                                             <p:message for="salesPrice" display="icon"/>
+
+                                                             <h:outputLabel value="Sales Discount :"/>
+                                                             <p:inputText id="salesDiscount" required="true" value="#{gameController.salesProduct.salesDP}" requiredMessage="Sales Discount cannot be blank !" size="20" converterMessage="Sales Discount must be a number !"/>
+                                                             <p:message for="salesDiscount" display="icon"/>
+
+                                                             <h:outputLabel value="Lease Price :"/>
+                                                             <p:inputText id="leasesPrice" required="true" value="#{gameController.leasesProduct.leasesPrice}" requiredMessage="Lease Price cannot be blank !" size="20" converterMessage="Lease Price must be a number !"/>
+                                                             <p:message for="leasesPrice" display="icon"/>
+
+                                                             <h:outputLabel value="Lease Discount :"/>
+                                                             <p:inputText id="leaseDiscount" required="true" value="#{gameController.leasesProduct.leasesDP}" requiredMessage="Lease Discount cannot be blank !" size="20" converterMessage="Lease Discount must be a number !"/>
+                                                             <p:message for="leaseDiscount" display="icon"/>
+
+                                                             <h:outputLabel value="Late Charge Per Day :"/>
+                                                             <p:inputText id="lateCharge" required="true" value="#{gameController.leasesProduct.lateChargePerDay}" requiredMessage="Late Charge Per Day cannot be blank !" size="20" converterMessage="Late Charge Per Day must be a number !"/>
+                                                             <p:message for="leaseDiscount" display="icon"/>
+
+                                                          </h:panelGrid>
+                                                      </p:panel>
+                                                      <p:panel header="Product Description Details">
+                                                          <h:panelGrid columns="3" >   
+
+                                                              <h:outputLabel value="Description :"/>
+                                                              <p:inputTextarea id="description" required="true" value="#{gameController.productDescription.description}" requiredMessage="Description cannot be blank !" rows="6" cols="33" />
+                                                              <p:message for="description" display="icon"/>
+
+                                                              <h:outputLabel value="Picture :"/>
+                                                              <p:fileUpload id="fileUpload" value="#{gameController.file}" mode="simple" required="true" requiredMessage="Picture cannot be blank !" />
+                                                              <p:message for="fileUpload" display="icon"/> 
+
+                                                              <h:outputLabel value="Format :"/>
+                                                              <p:inputText id="format" required="true" value="#{gameController.productDescription.format}" requiredMessage="Format cannot be blank !" size="20"/>
+                                                              <p:message for="format" display="icon"/>
+
+                                                              <h:outputLabel value="Language :"/>
+                                                              <p:inputText id="language" required="true" value="#{gameController.productDescription.language}" requiredMessage="Language cannot be blank !" size="20" converterMessage="Sales Price must be a number !"/>
+                                                              <p:message for="language" display="icon"/>
+
+                                                              <h:outputLabel value="Released Date :"/>
+                                                              <p:calendar value="#{gameController.productDescription.releasedDate}" id="releasedDate" pattern="dd MMM, yyyy" showButtonPanel="true" navigator="true" required="true" requiredMessage="Released Date cannot be blank !" converterMessage="Released Date must be in correct pattern"/>
+                                                              <p:message for="releasedDate" display="icon"/>
+
+                                                              <h:outputLabel value="Classification :"/>
+                                                              <p:selectOneMenu value="#{gameController.game.classification}">  
+                                                                       <f:selectItems value="#{gameController.listClassification}" />  
+                                                              </p:selectOneMenu> 
+                                                              <h:outputLabel />
+
+                                                              <h:outputLabel value="Manufacturer :"/>
+                                                              <p:inputText id="manufacturer" required="true" value="#{gameController.game.manufacturer}" requiredMessage="Manufacturer cannot be blank !" size="20" />
+                                                              <p:message for="manufacturer" display="icon"/>
+
+                                                              <h:outputLabel value="Number of Players :"/>
+                                                              <p:inputText id="nbrOfPlayers" required="true" value="#{gameController.game.nbrOfPlayers}" requiredMessage="Number of players cannot be blank !" size="8" converterMessage="Lease Discount must be a number !"/>
+                                                              <p:message for="nbrOfPlayers" display="icon"/>
+
+                                                          </h:panelGrid>
+                                                      </p:panel>
+                                                      <p:panel header="System Requirements Details">
+                                                          <h:panelGrid columns="3" >
+
+                                                               <h:outputLabel value="CPU :"/>
+                                                               <p:inputText id="cpu" required="false" value="#{gameController.systemRequirement.CPU}" requiredMessage="CPU cannot be blank !" size="20"/>
+                                                               <p:message for="cpu" display="icon"/>
+
+                                                               <h:outputLabel value="RAM :"/>
+                                                               <p:inputText id="ram" required="true" value="#{gameController.systemRequirement.RAM}" requiredMessage="RAM cannot be blank !" size="20"/>
+                                                               <p:message for="ram" display="icon"/>
+
+                                                               <h:outputLabel value="VGA :"/>
+                                                               <p:inputText id="vga" required="true" value="#{gameController.systemRequirement.VGA}" requiredMessage="VGA cannot be blank !" size="20" />
+                                                               <p:message for="vga" display="icon"/>
+
+                                                               <h:outputLabel value="HDD :"/>
+                                                               <p:inputText id="hdd" required="true" value="#{gameController.systemRequirement.HDD}" requiredMessage="HDD cannot be blank !" size="20" />
+                                                               <p:message for="hdd" display="icon"/>
+
+                                                               <h:outputLabel value="OS :"/>
+                                                               <p:inputText id="os" required="true" value="#{gameController.systemRequirement.OS}" requiredMessage="OS cannot be blank !" size="20" />
+                                                               <p:message for="os" display="icon"/>
+
+                                                               <h:outputLabel value="Sound :"/>
+                                                               <p:inputText id="sound" required="true" value="#{gameController.systemRequirement.sound}" requiredMessage="Sound cannot be blank !" size="20" />
+                                                               <p:message for="sound" display="icon"/>
+
+                                                               <h:outputLabel value="Note :"/>
+                                                               <p:inputTextarea id="note" required="false" value="#{gameController.systemRequirement.note}" rows="6" cols="33" />
+                                                               <p:message for="note" display="icon"/>
+
+                                                           </h:panelGrid>
+                                                          <p:commandButton value="Create New" action="#{gameController.doCreateNewGame()}" ajax="true" update="newGameMessages" />
+                                                       </p:panel>
+                                                   </h:form>                                
+                                            </p:tab>
+                                    </p:tabView>
+                                </p:tab>
+                
+                                
+                
+                        </p:tabView>
+                        
+                    </p:tab>
+                    
+                    
+                    
+                    
+                </p:tabView>
+             </div>
+            
+        </ui:define>
+        </ui:composition>
+    </html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+	<ui:composition template="HeaderFooter_template.xhtml">
+    	<ui:define name="content">
+        
+        <div class="header_general">
+           <h:graphicImage value="pic/shopcart.png" width="80" height="80"/>
+           <h:outputLabel value="Your Shooping cart" size="300"/>
+         </div>
+         
+        <div class="content_general">
+
+        <h2>Buy Items</h2>
+         <h:form enctype="multipart/form-data" id="buyItemListForm">
+             <p:growl id="messages" showDetail="true" />
+             <p:dataTable id="buyItems" var="buyItem" value="#{mainPageController.buyItemsDetails}" editable="true">  
+                                                    <p:ajax event="rowEdit" listener="#{mainPageController.onBuyCartItemEdit}" update=":buyItemListForm:messages, :buyItemListForm:buySubTotal, :rentItemListForm:rentSubTotal, :subTotal" />  
+                                                    <p:ajax event="rowEditCancel" listener="#{mainPageController.onBuyCartItemCancel}" update=":buyItemListForm:messages" />
+                                                   <p:column headerText="Title" style="width:125px">  
+                                                        <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{buyItem[1]}" />  
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <h:outputText value="#{buyItem[1]}" style="width:100%"/>  
+                                                        </f:facet>  
+                                                    </p:cellEditor>   
+                                                    </p:column>  
+
+                                                <p:column headerText="Quantity" style="width:75px">  
+                                                    <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{buyItem[2]}" />  
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <p:inputText value="#{buyItem[2]}" style="width:100%"/>  
+                                                        </f:facet>  
+                                                    </p:cellEditor>  
+                                                </p:column>  
+
+                                                <p:column headerText="Price" style="width:75px">  
+                                                        <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{buyItem[3]}" />  
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <h:outputText value="#{buyItem[3]}" style="width:100%"/>  
+                                                        </f:facet>  
+                                                    </p:cellEditor>  
+                                                </p:column>
+                                                    
+                                                <p:column headerText="Discount" style="width:75px">  
+                                                    <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{buyItem[4]}" />  
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <h:outputText value="#{buyItem[4]}" style="width:100%"/>  
+                                                        </f:facet>  
+                                                    </p:cellEditor> 
+                                                </p:column>
+
+                                                    
+                                                    <p:column headerText="Edit" style="width:50px">  
+                                                        <p:rowEditor />  
+                                                    </p:column>
+                                                    
+                                                    <p:column headerText="Remove" style="width: 50px">
+                                                         <p:commandButton id="removeBuyItem" action="#{mainPageController.onBuyCartItemDelete(buyItem[0])}" ajax="true" update=":buyItemListForm:buyItems, :buyItemListForm:messages, :buyItemListForm:buySubTotal, :rentItemListForm:rentSubTotal, :subTotal" icon="ui-icon-trash" />
+                                                    </p:column>
+
+                                               </p:dataTable> 
+                                                <h:panelGrid columns="2">
+                                                        <h:outputText value=" Buy Sub Total : $ "/>
+                                                        <h:outputText id="buySubTotal" value="#{mainPageController.buySubTotal}"/>
+                                                    </h:panelGrid>
+                                
+                                
+                                </h:form>
+         <br/>
+         
+         <h2>Rent Items</h2>
+         <h:form enctype="multipart/form-data" id="rentItemListForm">
+             <p:growl id="messages" showDetail="true" />
+             <p:dataTable id="rentItems" var="rentItem" value="#{mainPageController.rentItemsDetails}" editable="true">  
+                                                    <p:ajax event="rowEdit" listener="#{mainPageController.onRentCartItemEdit}" ajax="true" update=":rentItemListForm:messages, :buyItemListForm:buySubTotal, :rentItemListForm:rentSubTotal, :subTotal" />  
+                                                    <p:ajax event="rowEditCancel" listener="#{mainPageController.onRentCartItemCancel}" update=":rentItemListForm:messages" />
+                                                   <p:column headerText="Title" style="width:125px">  
+                                                        <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{rentItem[1]}" />  
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <h:outputText value="#{rentItem[1]}" style="width:100%"/>  
+                                                        </f:facet>  
+                                                    </p:cellEditor>   
+                                                    </p:column>  
+
+                                                <p:column headerText="Quantity" style="width:75px">  
+                                                    <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{rentItem[2]}" />  
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <p:inputText value="#{rentItem[2]}" style="width:100%"/>  
+                                                        </f:facet>  
+                                                    </p:cellEditor>  
+                                                </p:column>  
+
+                                                <p:column headerText="Price" style="width:75px">  
+                                                        <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{rentItem[3]}" />  
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <h:outputText value="#{rentItem[3]}" style="width:100%"/>  
+                                                        </f:facet>  
+                                                    </p:cellEditor>  
+                                                </p:column>
+                                                    
+                                                <p:column headerText="Discount" style="width:75px">  
+                                                    <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{rentItem[4]}" />  
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <h:outputText value="#{rentItem[4]}" style="width:100%"/>  
+                                                        </f:facet>  
+                                                    </p:cellEditor> 
+                                                </p:column>
+                                                    
+                                                    <p:column headerText="Leases Date" style="width:75px">  
+                                                    <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{mainPageController.format.format(rentItem[5])}" />  
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <p:calendar value="#{rentItem[5]}" pattern="yyyy-MM-dd" showButtonPanel="true" navigator="true" />  
+                                                        </f:facet>  
+                                                    </p:cellEditor> 
+                                                </p:column>
+                                                    
+                                                    <p:column headerText="Due Date" style="width:75px">  
+                                                    <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{mainPageController.format.format(rentItem[6])}" />  
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <p:calendar value="#{rentItem[6]}" pattern="yyyy-MM-dd" showButtonPanel="true" navigator="true" />    
+                                                        </f:facet>  
+                                                    </p:cellEditor> 
+                                                </p:column>
+
+                                                    
+                                                    <p:column headerText="Edit" style="width:50px">  
+                                                        <p:rowEditor />  
+                                                    </p:column>
+                                                    
+                                                    <p:column headerText="Remove" style="width: 50px">
+                                                         <p:commandButton id="removeBuyItem" action="#{mainPageController.onRentCartItemDelete(rentItem[0])}" ajax="true" update=":rentItemListForm:rentItems, :rentItemListForm:messages, :buyItemListForm:buySubTotal, :rentItemListForm:rentSubTotal, :subTotal" icon="ui-icon-trash" />
+                                                    </p:column>
+
+                                               </p:dataTable> 
+                                               <h:panelGrid columns="2">
+                                                        <h:outputText value=" Rent Sub Total : $ "/>
+                                                        <h:outputText id="rentSubTotal" value="#{mainPageController.rentSubTotal}"/>
+                                                    </h:panelGrid>
+                                
+                                
+                                </h:form>
+        </div>
+         
+            <div class="content_general_bottom">
+                <h:panelGrid id="totalPanel" columns="2">
+                    <h:outputText value="SubTotal : $ "/>
+                    <h:outputText id="subTotal" value="#{mainPageController.subTotal}"/>
+                </h:panelGrid>
+                <h:form enctype="multipart/form-data" id="navigationForm">
+                    <p:growl id="messages" showDetail="true" />
+                <h:panelGrid id="navigatePanel" columns="2">
+                    <p:commandButton value="Continue shopping" action="main.xhtml" ajax="false" />
+                    <p:commandButton value="Process to check out" action="#{mainPageController.checkOut()}" ajax="true" update=":navigationForm:messages, :buyItemListForm:buyItems, :rentItemListForm:rentItems, :buyItemListForm:buySubTotal, :rentItemListForm:rentSubTotal, :subTotal" />
+                </h:panelGrid>
+                </h:form>
+            </div>
+
+   		</ui:define>
+    </ui:composition>
+
+</html>

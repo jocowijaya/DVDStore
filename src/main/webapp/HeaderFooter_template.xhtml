@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+<title>DVDStore</title>
+<link rel="stylesheet" type="text/css" href="cssFile.css" />
+</h:head>
+<h:body>
+        <div class="wrap">
+            <div class="search">
+                <ui:insert name="search_box">
+                </ui:insert>
+               
+             </div>
+        
+        	 <div class="header1">
+
+                     <h:form id="menuBar">
+                         <p:commandLink id="loginLink" value="Login" onclick="dlg.show()"/> | <h:commandLink value="SignUp" action="#{loginController.navigateSignUp}" /> | <h:commandLink value="My Account" action="myAccount.faces"/> | <h:commandLink value="My Cart" action="MyCart.faces"/> | <h:commandLink value="Checkout" action="MyCart.faces"/> | <p:panel id="logoutPanel" visible="#{loginController.activate}"><p:commandLink id="logoutLink" value="Logout" action="#{loginController.logout()}" /></p:panel>
+                     </h:form>
+                      
+                 
+
+<p:dialog id="dialog" header="Login" widgetVar="dlg">
+        <h:form id="UserLoginForm">
+            <p:panel id="panel">
+                <h:panelGrid columns="3" >
+                    <h:outputLabel value="Username:"/>
+                    <p:inputText id="username" value="#{loginController.username}" required="true" requiredMessage="Username cannot be blank !" validatorMessage="Username is not valid ! (s0187523@cqumail.com)">
+                   		 <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                    </p:inputText>
+                    <p:message for="username" display="icon"/>
+                   
+                    <h:outputLabel value="Password :"/>
+                    <p:password id="password" value="#{loginController.password}" required="true" requiredMessage="Password cannot be blank !" />
+                    <p:message for="password" display="icon"/>
+                
+                 <h:commandLink value="Forgot your password?"/>
+                 <br/>
+              
+                <f:facet name="footer">
+                    <p:commandButton id="loginButton" value="Login" update="panel, :menuBar:logoutPanel" 
+                        actionListener="#{loginController.login}" 
+			oncomplete="handleLoginRequest(xhr, status, args)"/>
+                </f:facet>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    <h:form>
+        <p:commandButton id="hidden1" action="manageMovie.xhtml" widgetVar="hidden1" ajax="false" style="visibility: hidden" />
+    </h:form>
+    
+</p:dialog>
+
+<script type="text/javascript">
+	function handleLoginRequest(xhr, status, args) 
+        {       
+		if(args.validationFailed || args.loggedIn == "false") 
+                { 
+                    jQuery('#dialog').effect("shake", { times:3 }, 100);
+		} 
+                else 
+                {
+                    dlg.hide();
+                    jQuery('#loginLink').fadeOut();
+                    if(args.loggedIn == "admin")
+                    {
+                        hidden1.jq.click();       
+                    }
+		}
+	}
+</script>
+                 
+            </div>
+            
+            <div id="banner">
+            	<h:graphicImage value="pic/Banner.gif" width="1027" height="242"/> 
+                <hr/> 
+    		</div>
+		 
+        
+               
+                <div class="productInfo_content">
+             	<ui:insert name="content">
+                </ui:insert>
+            	</div>
+          
+                
+            <h:form>
+            <div class="footer">
+				 <p id="footer-font"> 
+                 <hr />
+                  <h:commandLink value="Home" action="main.faces"/> | <h:commandLink value="About Us" action="aboutUs.faces"/> | <h:commandLink value="Payment" action="payment.faces"/> | <h:commandLink value="Contact Us" action="contactUs.faces"/>
+                 <br />
+                 <br />
+                 Copyright@ 2012 Joco Wijaya (s0205991) and Khanh Duy Huynh (s0187523). All rights reserved.</p>
+          	</div>
+            </h:form>
+            
+        </div>
+</h:body>
+</html>

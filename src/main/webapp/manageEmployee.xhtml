@@ -1,0 +1,136 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+	<ui:composition template="HeaderFooterAdmin_template.xhtml">
+                <ui:define name="content">
+                    <h:form enctype="multipart/form-data" id="employeeListForm">
+                                <p:growl id="messages" showDetail="true"/>
+                                <p:dataTable id="employees" var="employee" value="#{signUpController.employeeList}" editable="true">  
+                                                    <p:ajax event="rowEdit" listener="#{signUpController.onEmployeeEdit}" update=":employeeListForm:messages" />  
+                                                    <p:ajax event="rowEditCancel" listener="#{signUpController.onEmployeeCancel}" update=":employeeListForm:messages" />
+
+                                                    <p:column headerText="Email" style="width:125px">  
+                                                    <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{employee.email}" />  
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <p:inputText value="#{employee.email}" style="width:100%"/>  
+                                                        </f:facet>  
+                                                    </p:cellEditor>  
+                                                </p:column>  
+
+                                                <p:column headerText="First Name" style="width:75px">  
+                                                    <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{employee.firstName}" />  
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <p:inputText value="#{employee.firstName}" style="width:100%"/>  
+                                                        </f:facet>  
+                                                    </p:cellEditor>  
+                                                </p:column>  
+
+                                               
+                                                <p:column headerText="Last Name" style="width:75px">  
+                                                    <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{employee.lastName}" />  
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <p:inputText value="#{employee.lastName}" style="width:100%"/>  
+                                                        </f:facet>  
+                                                    </p:cellEditor>  
+                                                </p:column>
+                                                    
+                                                <p:column headerText="Phone Number" style="width:75px">  
+                                                    <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{employee.phoneNbr}" />  
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <p:inputText value="#{employee.phoneNbr}" style="width:100%"/>  
+                                                        </f:facet>  
+                                                    </p:cellEditor>  
+                                                </p:column>
+                                                    
+                                                <p:column headerText="Status" style="width:75px">  
+                                                    <p:cellEditor>  
+                                                        <f:facet name="output">  
+                                                            <h:outputText value="#{employee.status}" />  
+                                                        </f:facet>  
+                                                        <f:facet name="input">  
+                                                            <p:selectOneMenu value="#{employee.status}">  
+                                                                <f:selectItems value="#{signUpController.roles}" />  
+                                                            </p:selectOneMenu>  
+                                                        </f:facet>  
+                                                    </p:cellEditor>  
+                                                </p:column>
+                                                    
+                                                <p:column headerText="Edit" style="width:50px">  
+                                                        <p:rowEditor />  
+                                                    </p:column>
+                                                    
+                                                    <p:column headerText="Delete" style="width: 50px">
+                                                        <p:commandButton id="deleteEmployee" action="#{signUpController.onEmployeeDelete(employee.USID)}" ajax="true" update=":employeeListForm:employees, :employeeListForm:messages" icon="ui-icon-trash" />
+                                                    </p:column>
+
+                                               </p:dataTable> 
+                                </h:form>
+            
+                        <h:form id="newEmployeeForm">
+                                <p:panel header="Personal Details">
+                                        <p:messages id="employpersonalMessages" />
+
+                                             <h:panelGrid columns="3" >
+
+                                            <h:outputLabel value="Email Address(username)  :"/>
+                                            <p:inputText id="employemail" value="#{signUpController.employee.email}" required="true" requiredMessage="Email Address cannot be blank !" size="20" validatorMessage="Email is not valid ! (you@yahoo.com)">
+                                                <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                                             </p:inputText>
+                                            <p:message for="employemail" display="icon"/>
+
+                                            <h:outputLabel value="Password :"/>
+                                            <p:password id="employpassword" value="#{signUpController.employee.password}" required="true" requiredMessage="Password cannot be blank !" match="employconfirm_password" validatorMessage="Password and confirm password must be matched" size="20"/>
+                                            <p:message for="employpassword" display="icon"/>
+                                            
+                                            <h:outputLabel value="Confirm Password :"/>
+                                            <p:password id="employconfirm_password" value="#{signUpController.employee.password}" required="true" requiredMessage="Confirm Password cannot be blank !" size="20"/>
+                                            <p:message for="employconfirm_password" display="icon"/>
+                                            
+                                             <h:outputLabel value="First Name :"/>
+                                             <p:inputText id="employfname" value="#{signUpController.employee.firstName}" required="true" requiredMessage="First Name cannot be blank !" size="20"/>
+                                             <p:message for="employfname" display="icon"/>
+                                             
+                                             <h:outputLabel value="Last Name :"/>
+                                             <p:inputText id="employlname" required="true" value="#{signUpController.employee.lastName}" requiredMessage="Last Name cannot be blank !" size="20"/>
+                                             <p:message for="employlname" display="icon"/>
+                                             
+                                             <h:outputLabel value="Phone Number :"/>
+                                             <p:inputText id="employphoneNbr" required="true" value="#{signUpController.employee.phoneNbr}" requiredMessage="Phone Number cannot be blank !" size="20"/>
+                                             <p:message for="employphoneNbr" display="icon"/>
+                                             
+                                             <h:outputLabel value="Status :"/>
+                                             <p:selectOneMenu value="#{signUpController.employee.status}">  
+                                                 <f:selectItems value="#{signUpController.roles}" />  
+                                             </p:selectOneMenu>
+                                             <h:outputLabel />
+                                             
+                                        </h:panelGrid>
+                      </p:panel><p:commandButton value="Create new" actionListener="#{signUpController.doCreateEmployee}" ajax="true" update=":employeeListForm:employees, :employeeListForm:messages" />
+
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+	
+        
+</html>
+
+
+
