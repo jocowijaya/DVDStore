@@ -1,4 +1,4 @@
-E-Commerce DVD Store Application
+E-Commerce Application - DVDStore Sample
 ========
 Copyright (C) 2013 Joco Wijaya.
 
