@@ -155,4 +155,4 @@ These are the intructions about how to run the <b>DVDStore</b> application softw
 
 For any question regarding to DVDStore application, please do not hestiate to contact me via jocowijaya@gmail.com
 
-*The application written by [Joco Wijaya](https://plus.google.com/106156651020787222104).* Feel free to add me to your circles on Google Plus and pester me to fix stuff that's broken or answer a question ^_^
+*The sample is written by [Joco Wijaya](https://plus.google.com/106156651020787222104).* Feel free to add me to your circles on Google Plus and pester me to fix stuff that's broken or answer a question ^_^
