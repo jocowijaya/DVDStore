@@ -48,7 +48,7 @@ These are the intructions about how to run the <b>DVDStore</b> application softw
    
    8.1 Find <b>startNetworkServer.bat</b> in the path 
 
-   > **Note** : <b>db-derby-10.6.2.1-bin\bin\startNetworkServer.bat</b>
+   > **Note**: <b>db-derby-10.6.2.1-bin\bin\startNetworkServer.bat</b>
 
    8.2 Double click on it to start the server or you can start it by typing “startNetworkServer” in command prompt.
    
@@ -77,6 +77,8 @@ These are the intructions about how to run the <b>DVDStore</b> application softw
 13. Compile, package the application and go to target folder again like <b>step 7</b> and <b>step 9</b>.
 
 14. Deploy the application (war file) by using following command:
+
+  >**Note**: <b>The war file can be found within <i>target</i> folder.</b>
  
   ```sh
   asadmin deploy DVDStore.war 
