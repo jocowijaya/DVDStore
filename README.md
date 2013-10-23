@@ -12,7 +12,7 @@ Not only handle the customer needs, but also <b>DVDStore</b> system provides sev
 
 For running DVDStore Sample, several enviroments are required to be developed, such as :
 
-<h3>Install JavaTM Platform</h3>
+<h4>Install JavaTM Platform</h4>
 
    1. Download the following standard Edition Development Kit (JDKTM) : 
    
@@ -24,7 +24,7 @@ For running DVDStore Sample, several enviroments are required to be developed, s
    
    <b>IMPORTANT</b>: Please check the download version while setting up the enviroment variable.   
 
-<h3>Install Apache Maven Tool</h3>
+<h4>Install Apache Maven Tool</h4>
 
    1. Download the current version of [Apache Maven](http://maven.apache.org/download.html) 
    
@@ -34,7 +34,7 @@ For running DVDStore Sample, several enviroments are required to be developed, s
 
    <b>IMPORTANT</b>: Please check the download version while setting up the enviroment variable.   
 
-<h3>Install Derby Database</h3>
+<h4>Install Derby Database</h4>
 
    1. Donwload [Derby Database 10.6.2.1](http://db.apache.org/derby/releases/release-10.6.2.1.html) 
    
@@ -44,13 +44,15 @@ For running DVDStore Sample, several enviroments are required to be developed, s
 
    <b>IMPORTANT</b>: Please check the download version while setting up the enviroment variable. 
    
-<h3>Install GlassFish Application Server</h3>
+<h4>Install GlassFish Application Server</h4>
 
    1. Donwload 3.1.1 version of [GlassFish Application Server](http://glassfish.java.net/downloads/3.1-final.html)
    
    2. Unzip the archive and place it in a location of your choosing.
    
    3. Add Glassfish to your path. See the following [configuration](http://www.eteration.com/installing-glassfish-creating-domains-deploying-applications-to-glassfish-server/) for setting up.
+
+   <b>IMPORTANT</b>: Please check the download version while setting up the enviroment variable. 
 
 <h2>How to run the App</h2>
 
@@ -88,7 +90,7 @@ These are the intructions about how to run the <b>DVDStore</b> application softw
 
     <b>IMPORTANT</b>: Make sure you already download the Derby Database folder.
    
-    If not, you can download it via http://db.apache.org/derby/releases/release-10.6.2.1.html
+    If not, you can download it on http://db.apache.org/derby/releases/release-10.6.2.1.html
    
    8.1 Find <b>startNetworkServer.bat</b> in the path 
 
