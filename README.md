@@ -8,7 +8,51 @@ Copyright (C) 2013 Joco Wijaya.
 
 Not only handle the customer needs, but also <b>DVDStore</b> system provides several function and features for the DVD store employer and administrator in helping the customer who come to the store to view, search, buy and lease the DVD product. For the customer who is not able to place the order in the website system while they come to the store, the DVD employers will help them by using <b>DVDStore</b> application system. Not only view, and search but also create , edit and delete data function within the system has been provided for the administrator in utilising the system.
 
-<h2>User Manual - Test Intruction</h2>
+<h2>Development Enviroment</h2>
+
+For running DVDStore Sample, several enviroments are required to be developed, such as :
+
+<h3>Install JavaTM Platform</h3>
+
+   1. Download the following standard Edition Development Kit (JDKTM) : 
+   
+      [JDK 1.6.0_25](http://www.oracle.com/technetwork/java/javase/downloads/jdk-6u25-download-346242.html)
+
+   2. Unzip the archive and place it in a location of your choosing.
+   
+   3. Add Java to your path. See the development website for additional [configuration details.](http://vietpad.sourceforge.net/javaonwindows.html)  
+   
+   <b>IMPORTANT</b>: Please check the download version while setting up the enviroment variable.   
+
+<h3>Install Apache Maven Tool</h3>
+
+   1. Download the current version of [Apache Maven](http://maven.apache.org/download.html) 
+   
+   2. Unzip the archive and place it in a location of your choosing.
+   
+   3. Add Maven to your path. See the following website for additional [setup details.](http://www.tutorialspoint.com/maven/maven_environment_setup.htm)
+
+   <b>IMPORTANT</b>: Please check the download version while setting up the enviroment variable.   
+
+<h3>Install Derby Database</h3>
+
+   1. Donwload [Derby Database 10.6.2.1](http://db.apache.org/derby/releases/release-10.6.2.1.html) 
+   
+   2. Unzip the archive and place it in a location of your choosing.
+   
+   3. Add Derby to your path. See the following website for additional [configuration details.](http://db.apache.org/derby/docs/10.0/manuals/getstart/gspr16.html)
+
+   <b>IMPORTANT</b>: Please check the download version while setting up the enviroment variable. 
+   
+<h3>Install GlassFish Application Server</h3>
+
+   1. Donwload 3.1.1 version of [GlassFish Application Server](http://glassfish.java.net/downloads/3.1-final.html)
+   
+   2. Unzip the archive and place it in a location of your choosing.
+   
+   3. Add Glassfish to your path. See the following [configuration](http://www.eteration.com/installing-glassfish-creating-domains-deploying-applications-to-glassfish-server/) for setting up.
+
+<h2>How to run the App</h2>
 
 These are the intructions about how to run the <b>DVDStore</b> application software.
 
