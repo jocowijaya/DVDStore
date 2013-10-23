@@ -66,7 +66,7 @@ These are the intructions about how to run the <b>DVDStore</b> application softw
 11. Create jdbc link between the database and the application by using following command with the jdbc link name is <b>DVDStoreDS</b>: 
 
   ```sh
-  asadmin create-jdbc-resource –-connectionpoolid DVDStorePool jdbc/DVDStoreDS
+  asadmin create-jdbc-resource --connectionpoolid DVDStorePool jdbc/DVDStoreDS
   ```
   
 12. Go back the application folder by using following command: 
