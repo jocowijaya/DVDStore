@@ -66,7 +66,7 @@ These are the intructions about how to run the <b>DVDStore</b> application softw
 
 4. Change the directory to the application folder, use the "<b>cd</b>" command. 
 
-   > **For example**: “<b>cd Desktop\DVDStore-master</b>”
+   > **For example**: “<b>cd Desktop\DVDStore-master\DVDStore-master</b>”
 
 5. Start GlassFish domain by using following command: 
 
