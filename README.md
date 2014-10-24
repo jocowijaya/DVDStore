@@ -144,13 +144,6 @@ These are the intructions about how to run the <b>DVDStore</b> application softw
     
     The user will always be navigated to the user default homepage at the beginning.At the time the browser displays the DVDStore homepage, the application will automatically load the default data into the database system. So the robust application contains several default data and ready to be used and tested.
 
-16. For the testing purpose, the default admin username has been provided for tester to login into the system.
-
-  ```sh
-  Username (admin) : admin@yahoo.com
-  Password (admin) : admin
-  ```
-  
 <h2>Support</h2>
 
 For any question regarding to DVDStore application, please do not hestiate to contact me via jocowijaya@gmail.com
